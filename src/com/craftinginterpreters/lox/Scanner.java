@@ -102,6 +102,8 @@ class Scanner {
                 if (match('/')) {
                     // A comment goes until the end of the line.
                     while (peek() != '\n' && !isAtEnd()) advance();
+                } else if (match('*')) {
+                    closeComment();
                 } else {
                     addToken(SLASH);
                 }
@@ -132,6 +134,23 @@ class Scanner {
         }
     }
 
+    private void closeComment(){
+        while (peek() != '*' && peekNext() != '/' && !isAtEnd()) {
+            if (peek() == '\n') line++;
+            advance();
+
+            // Unterminated string.
+            if (isAtEnd()) {
+                Lox.error(line, "Unterminated string.");
+                return;
+            }
+
+        }   advance();
+
+        // charAt(current) is '*'.
+        // Need to advance again and charAt(current) is '/'.
+        advance();
+    }
 
     private void identifier() {
         while (isAlphaNumeric(peek())) advance();
