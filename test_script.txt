@@ -1,0 +1,12 @@
+
+//this is comment
+
+a=3;
+
+/*this is a block comment*/
+
+/* this is 
+another
+block comment!
+...
+*/
