@@ -29,3 +29,7 @@ hs_err_pid*
 
 # out
 out/
+
+# private
+./src/compile_jlox.sh
+./src/bin
